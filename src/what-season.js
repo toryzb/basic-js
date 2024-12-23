@@ -15,10 +15,12 @@ function getSeason(date) {
   if (date === undefined) {
     return 'Unable to determine the time of year!';
   }
-  if (Object.prototype.toString.call(date) !== '[object Date]') {
-    throw new Error('Invalid date!');
-  }
-  if (isNaN(date.getTime())) {
+  
+  if (
+    !(date instanceof Date) ||
+    Object.prototype.toString.call(date) !== '[object Date]' ||
+    isNaN(date.getTime())
+  ) {
     throw new Error('Invalid date!');
   }
   const year = date.getFullYear();
